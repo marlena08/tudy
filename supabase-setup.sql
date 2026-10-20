@@ -33,3 +33,6 @@ create policy "own activity" on public.activity for all using (auth.uid() = user
 create function public.handle_new_user() returns trigger language plpgsql security definer set search_path = '' as $$
 begin insert into public.profiles (id, name) values (new.id, new.raw_user_meta_data->>'name'); return new; end $$;
 create trigger on_auth_user_created after insert on auth.users for each row execute function public.handle_new_user();
+
+-- Aggiunta successiva (foto profilo). Da eseguire anche su progetti già creati:
+alter table public.profiles add column if not exists avatar text;
