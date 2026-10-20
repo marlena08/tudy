@@ -3,18 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+/* Schermata d'ingresso: icona che compare, spunta che si disegna, scritta, dissolvenza */
+#splash{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:#0c1424;transition:opacity .35s ease}
+#splash.light{background:#f2f6fc}#splash.out{opacity:0;pointer-events:none}
+#splash svg{width:72px;height:72px;animation:spIn .45s cubic-bezier(.2,.8,.2,1.2) both}
+#splash .c{stroke-dasharray:1;stroke-dashoffset:1;animation:spDraw .5s .35s cubic-bezier(.6,0,.2,1) forwards}
+#splash .t{font:700 22px Inter,system-ui,sans-serif;letter-spacing:.5px;color:#7fb1dc;opacity:0;animation:spTx .4s .75s ease forwards}
+#splash.light .t{color:#2c6aa0}
+@keyframes spIn{from{opacity:0;transform:scale(.6)}}@keyframes spDraw{to{stroke-dashoffset:0}}@keyframes spTx{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){#splash svg,#splash .c,#splash .t{animation:none;stroke-dashoffset:0;opacity:1}}
+</style>
 <meta name="theme-color" content="#0c1424">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="tudy">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="64x64" href="icons/favicon-64.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <title>tudy</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>if(window.tailwind)tailwind.config={darkMode:'class'}</script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f2f6fc;--sf:#f8fafd;--sf2:#e8f0fa;--bd:#d5e1f0;--ac:#2c6aa0;--acs:#2c6aa0;--tx:#17243a;--mu:#6b7a90;--tr:#dbe5f1;--pill:#e1ecf8}
@@ -55,6 +63,12 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 </style>
 </head>
 <body class="dark">
+<div id="splash" aria-hidden="true"><svg viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#2f6fa3"/><path class="c" pathLength="1" d="M19 33.5l8.5 8.5L45.5 23" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="t">tudy</div></div>
+<script>(function(){var t='dark';try{var d=JSON.parse(localStorage.getItem('tudy.v2'));if(d&&d.theme)t=d.theme;else if(matchMedia('(prefers-color-scheme: light)').matches)t='light'}catch(e){}if(t=='light')document.getElementById('splash').classList.add('light');
+window.__sp0=Date.now();window.hideSplash=function(){var s=document.getElementById('splash');if(!s||s.dataset.h)return;s.dataset.h=1;var w=Math.max(0,1500-(Date.now()-window.__sp0));setTimeout(function(){s.classList.add('out');setTimeout(function(){s.remove()},400)},w)};setTimeout(window.hideSplash,4000)})()</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>if(window.tailwind)tailwind.config={darkMode:'class'}</script>
 <div class="flex h-full">
   <aside class="hidden md:flex flex-col w-64 shrink-0 p-5 gap-2 border-r" style="border-color:var(--bd)">
     <div class="text-2xl font-bold px-3 mb-6 acs">tudy</div>
@@ -250,7 +264,7 @@ function askNewPw(){sheet('Set a new password',[{k:'pw',l:'New password',t:'pass
 const netErr=e=>!navigator.onLine||(e&&/fetch|network|retryable|timeout/i.test((e.name||'')+' '+(e.message||'')));
 async function boot(){const lu=U;let er=null;try{if(sb){const r=await sb.auth.getSession();er=r.error;sess=r.data.session;U=sess?userOf(sess.user):null}}catch(e){er=e;console.error(e)}
  if(sb&&!sess&&lu&&owner&&netErr(er)){offAuth=true;U=lu;syncSt='offline';lastSnap=snap();lastProf=prof()}
- booted=true;render();if(sess)pull()}
+ booted=true;render();hideSplash();if(sess)pull()}
 async function reauth(){if(!sb||sess||!offAuth)return;try{const r=await sb.auth.getSession();if(r.data.session){sess=r.data.session;offAuth=false;U={...userOf(sess.user),name:U.name};pull()}else if(!netErr(r.error)){offAuth=false;U=null;render()}}catch(e){}}
 if(sb)sb.auth.onAuthStateChange((ev,s)=>{if(s&&offAuth&&!sess&&owner==s.user.id){sess=s;offAuth=false;setTimeout(pull,0);return}if(ev=='SIGNED_IN'&&s&&pend&&!sess){pend=null;sess=s;U=userOf(s.user);S.view='today';booted=true;setTimeout(async()=>{await pull();render();if(!toured)startTour()},0);return}
  if(ev=='USER_UPDATED'&&s&&U&&s.user.email&&s.user.email!==U.email){U.email=s.user.email;render()}
@@ -503,7 +517,7 @@ async function pushTest(){if(!pushOk||!sb){sysNote({k:'test',h:'tudy',b:tx('This
  setNt(tx('Sending…'));
  try{const r=await sb.functions.invoke('tudy-push',{body:{test:true}});if(r.error||!r.data||!r.data.sent)throw r.error||new Error('none');setNt(tx('Sent. You can close tudy: the next reminders will arrive anyway.'))}
  catch(e){console.warn(e);sysNote({k:'test',h:'tudy',b:tx('This is a test reminder.')});setNt(tx('The server did not answer yet, so this test came from the app. Check the Supabase setup.'))}}
-const APPV='p14';
+const APPV='p15';
 // Aggiornamenti automatici: controlla sempre se c'è un sw.js nuovo e, quando la nuova versione prende il controllo, ricarica la pagina una volta.
 if('serviceWorker'in navigator&&/^https?:/.test(location.protocol)){const hadCtl=!!navigator.serviceWorker.controller;let reloaded=false;
  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadCtl&&!reloaded){reloaded=true;location.reload()}});
