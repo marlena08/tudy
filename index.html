@@ -325,7 +325,7 @@ function vSet(){return `<div class="fade max-w-2xl mx-auto"><h1 class="text-3xl 
 <div id="t-prof" class="card p-5 mt-5 flex items-center gap-4"><div class="btn w-14 h-14 rounded-full overflow-hidden grid place-items-center text-xl font-bold shrink-0">${avatar?`<img src="${avatar}" alt="" class="w-full h-full object-cover">`:esc(U.name[0].toUpperCase())}</div><div class="min-w-0"><b>${esc(U.name)}</b><div class="mu text-sm truncate">${esc(U.email)}</div></div><button data-editprof class="ml-auto acs text-sm font-semibold">Edit</button></div>${sb?'<div class="mt-3"><button class="chip" data-chpw>Change password</button></div>':''}
 <h2 class="text-lg font-semibold mt-7 mb-3">Appearance</h2><div class="card p-4 flex gap-2">${['light','dark'].map(x=>`<button class="chip ${theme==x?'on':''}" data-th="${x}">${x=='light'?'Light':'Dark'}</button>`).join('')}</div>
 <h2 class="text-lg font-semibold mt-7 mb-3">Language</h2><div class="card p-4 flex gap-2">${['en','it'].map(x=>`<button class="chip ${lang==x?'on':''}" data-lang="${x}">${x=='en'?'English':'Italiano'}</button>`).join('')}</div>
-<h2 class="text-lg font-semibold mt-7 mb-3">Your data</h2><div class="card p-4 text-sm"><p class="mu">${f('mydata',tasks.length,notes.length)}</p><p class="acs text-xs mt-2">${tx(syncLbl())}</p><div class="flex gap-2 mt-4 flex-wrap"><button class="chip" data-tour>Replay tour</button><button class="chip" data-reset>Delete all data</button><button class="chip" data-logout>Log out</button></div></div></div>`}
+<h2 class="text-lg font-semibold mt-7 mb-3">Your data</h2><div class="card p-4 text-sm"><p class="mu">${f('mydata',tasks.length,notes.length)}</p><p class="acs text-xs mt-2">${tx(syncLbl())}</p><p class="mu text-xs mt-1">tudy ${APPV}</p><div class="flex gap-2 mt-4 flex-wrap"><button class="chip" data-tour>Replay tour</button><button class="chip" data-reset>Delete all data</button><button class="chip" data-logout>Log out</button></div></div></div>`}
 document.addEventListener('click',e=>{
  const g=s=>e.target.closest(s);let x;
  if(g('[data-alt]')){const a=curAlt;closeSheet();return a.fn()}
@@ -378,7 +378,11 @@ document.addEventListener('input',e=>{
 document.addEventListener('keydown',e=>{
  if(e.key=='Escape'){if($('#tour').style.display=='block')endTour();else closeSheet()}});
 boot();
-if('serviceWorker'in navigator&&/^https?:/.test(location.protocol))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+const APPV='p9';
+// Aggiornamenti automatici: controlla sempre se c'è un sw.js nuovo e, quando la nuova versione prende il controllo, ricarica la pagina una volta.
+if('serviceWorker'in navigator&&/^https?:/.test(location.protocol)){const hadCtl=!!navigator.serviceWorker.controller;let reloaded=false;
+ navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadCtl&&!reloaded){reloaded=true;location.reload()}});
+ addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{document.addEventListener('visibilitychange',()=>{if(!document.hidden)r.update().catch(()=>{})})}).catch(()=>{}))}
 </script>
 </body>
 </html>
