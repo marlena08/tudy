@@ -223,7 +223,7 @@ async function pull(){if(!sb||!sess)return;try{
  if(a.error||b.error)throw(a.error||b.error);
  tasks=a.data.map(fromT);tasks.forEach(mig);notes=b.data.map(fromN);remote={t:new Set(tasks.map(x=>x.id)),n:new Set(notes.map(x=>x.id))};
  if(c.data){if(c.data.lang)lang=c.data.lang;if(c.data.theme)theme=c.data.theme;toured=!!c.data.toured||toured;if(c.data.name)U.name=c.data.name}
- lastSnap=snap();lastProf=prof();setSt('ok');render()}catch(e){console.error(e);setSt('offline')}}
+ lastSnap=snap();lastProf=prof();setSt('ok');render();if(!toured&&$('#tour').style.display!='block')startTour()}catch(e){console.error(e);setSt('offline')}}
 async function startSession(s,n,reg){sess=s;U=userOf(s.user);if(n)U.name=n;S.view='today';
  if(reg){toured=false;await sb.from('profiles').upsert({id:s.user.id,name:U.name,lang,theme,toured:false})}
  await pull();render();if(!toured)startTour()}
