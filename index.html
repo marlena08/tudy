@@ -33,6 +33,10 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--tx)
 .mu{color:var(--mu)}.acs{color:var(--acs)}
 .btn{background:var(--ac);color:#fff}
 .pill{background:var(--pill);color:var(--acs);border-radius:8px;padding:2px 10px;font-size:11px;font-weight:600}
+/* Priorità: rosso, giallo, blu (più tenui nel tema scuro) */
+.pill.p-High{background:#fde2e2;color:#b42318}.pill.p-Medium{background:#fdf0cf;color:#a15c07}.pill.p-Low{background:#e1ecf8;color:#2c6aa0}
+.dark .pill.p-High{background:rgba(240,113,113,.16);color:#f4a3a3}.dark .pill.p-Medium{background:rgba(234,179,8,.15);color:#f2cd5c}.dark .pill.p-Low{background:#16314f;color:#7fb1dc}
+[data-chips=pri] .chip.on[data-val=High]{background:#d64545;border-color:#d64545}[data-chips=pri] .chip.on[data-val=Medium]{background:#d99a06;border-color:#d99a06}
 .bar{height:6px;border-radius:9px;background:var(--tr);overflow:hidden}.bar>i{display:block;height:100%;background:var(--ac);border-radius:9px;transition:width .3s}
 .dark .bar>i{background:var(--acs)}
 .cb{width:22px;height:22px;border-radius:6px;border:2px solid var(--mu);flex:none;display:grid;place-items:center;color:#fff;transition:.15s}
@@ -135,7 +139,7 @@ function toggleTask(id,e){e&&e.stopPropagation();const t=tasks.find(x=>x.id==id)
 const cb=(t)=>`<button class="cb ${t.done?'on':''}" data-chk="${t.id}" aria-label="Toggle ${esc(t.t)}">${t.done?I.chk:''}</button>`;
 const row=(t,hist)=>`<div class="card p-4 cursor-pointer fade ${hist?'opacity-50':''}" style="${hist?'':'border-color:var(--ac)'}" data-open="${t.id}">
  <div class="flex items-center gap-3">${cb(t)}<div class="flex-1 font-semibold">${esc(t.t)}</div>${hist?'':`<span class="mu">${I.chev}</span>`}</div>
- <div class="flex items-center justify-between mt-3 text-xs"><span class="${hist?'mu':'acs'}">${dueF(t)}</span><span class="pill" style="${hist?'background:transparent;color:var(--mu)':''}">${t.pri}</span></div>
+ <div class="flex items-center justify-between mt-3 text-xs"><span class="${hist?'mu':'acs'}">${dueF(t)}</span><span class="pill p-${t.pri}">${t.pri}</span></div>
  <div class="flex items-center gap-3 mt-2"><div class="bar flex-1"><i style="width:${t.p}%"></i></div><span class="text-xs ${hist?'acs font-semibold':'mu'}">${t.p}%</span></div></div>`;
 
 function vToday(){
@@ -172,7 +176,7 @@ function vDetail(){
  const t=tasks.find(x=>x.id==S.open);
  return `<div class="fade max-w-2xl mx-auto"><div class="flex justify-between mu text-sm"><button data-back class="flex items-center gap-1">${I.back}Tasks</button><div class="flex gap-1"><button data-edit class="p-2" aria-label="Edit task">${I.pen}</button><button data-del class="p-2" aria-label="Delete task">${I.trash}</button></div></div>
  <h1 class="text-3xl font-bold mt-4">${esc(t.t)}</h1>
- <div class="flex gap-2 mt-3 text-sm"><span class="card px-3 py-1 flex items-center gap-2" style="border-radius:10px">${I.clock}${dueF(t)}</span><span class="pill flex items-center" style="padding:4px 12px;font-size:13px">${t.pri} priority</span></div>
+ <div class="flex gap-2 mt-3 text-sm"><span class="card px-3 py-1 flex items-center gap-2" style="border-radius:10px">${I.clock}${dueF(t)}</span><span class="pill p-${t.pri} flex items-center" style="padding:4px 12px;font-size:13px">${t.pri} priority</span></div>
  <div class="card p-5 mt-5"><div class="flex justify-between items-center"><b>Manual progress</b><span class="acs text-3xl font-bold" id="pv">${t.p}%</span></div>
  <div class="relative mt-8"><span id="tip" class="btn absolute -top-8 text-xs font-semibold px-2.5 py-1 rounded-lg" style="transform:translateX(-50%)">${t.p}%</span><input type="range" id="rng" min="0" max="100" value="${t.p}" aria-label="Progress"></div>
  <div class="flex justify-between mu text-xs mt-3"><span>0%</span><span>Drag to update</span><span>100%</span></div></div>
@@ -538,7 +542,7 @@ function renCat(i,v){const old=myCats()[i];v=v.trim();if(v==tx(old))return;const
  const a=[...myCats()];a[i]=v;setCats(a);notes.forEach(n=>{if(n.c==old)n.c=v});if(S.cat==old)S.cat=v;render();manageCats()}
 function delCat(i){const c=myCats()[i],n=notes.filter(x=>x.c==c).length;
  sheet(tx('Delete this theme?'),[{k:'i',t:'info',l:n?f('cat_del',n):tx('No notes use this theme.')}],'Delete',()=>{setCats(myCats().filter((x,j)=>j!=i));notes.forEach(x=>{if(x.c==c)x.c=''});if(S.cat==c)S.cat='All';render();setTimeout(manageCats,0)})}
-const APPV='p16';
+const APPV='p17';
 // Aggiornamenti automatici: controlla sempre se c'è un sw.js nuovo e, quando la nuova versione prende il controllo, ricarica la pagina una volta.
 if('serviceWorker'in navigator&&/^https?:/.test(location.protocol)){const hadCtl=!!navigator.serviceWorker.controller;let reloaded=false;
  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadCtl&&!reloaded){reloaded=true;location.reload()}});
