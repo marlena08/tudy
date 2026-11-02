@@ -14,7 +14,7 @@ body{margin:0;font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans
 main{max-width:720px;margin:0 auto;padding:calc(28px + env(safe-area-inset-top)) 16px 64px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:22px;color:var(--acs);text-decoration:none}
-.logo svg{width:32px;height:32px}
+.logo svg:first-child{width:32px;height:32px}.logo{position:relative}
 .lang{display:flex;gap:6px}
 .lang button{border:1px solid var(--bd);background:var(--sf);color:var(--mu);border-radius:999px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
 .lang button.on{background:var(--ac);border-color:var(--ac);color:#fff}
@@ -32,7 +32,7 @@ p{margin:6px 0}ul{margin:6px 0;padding-left:20px}li{margin:4px 0}
 <body>
 <main>
  <div class="top">
-  <a class="logo" href="./"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#2f6fa3"/><path d="M19 33.5l8.5 8.5L45.5 23" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>tudy</a>
+  <a class="logo" href="./"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#2f6fa3"/><path d="M21 24.5L29 36.5L43 13.5M29 36.5L22 50.5" fill="none" stroke="#fff" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg><svg viewBox="0 1 189 90" style="height:24px;width:auto" aria-hidden="true"><path d="M15.0 12V58Q15.0 70 27.0 70M7.0 30H25.0 M46.0 30V54A14 14 0 0 0 74.0 54V30M74.0 54V70 M133.0 8V70 M93.0 50A20 20 0 1 0 133.0 50A20 20 0 1 0 93.0 50 M152.0 46L164.0 64L182.0 30M164.0 64L153.5 84" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">tudy</span></a>
   <div class="lang"><button data-set="it">IT</button><button data-set="en">EN</button></div>
  </div>
 

@@ -8,8 +8,8 @@
 #splash{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:#0c1424;transition:opacity .35s ease}
 #splash.light{background:#f2f6fc}#splash.out{opacity:0;pointer-events:none}
 #splash svg{width:72px;height:72px;animation:spIn .45s cubic-bezier(.2,.8,.2,1.2) both}
-#splash .c{stroke-dasharray:1;stroke-dashoffset:1;animation:spDraw .5s .35s cubic-bezier(.6,0,.2,1) forwards}
-#splash .t{font:700 22px Inter,system-ui,sans-serif;letter-spacing:.5px;color:#7fb1dc;opacity:0;animation:spTx .4s .75s ease forwards}
+#splash .c{stroke-dasharray:1;stroke-dashoffset:1;animation:spDraw .6s .35s cubic-bezier(.6,0,.2,1) forwards}
+#splash .t{color:#7fb1dc;opacity:0;animation:spTx .4s .75s ease forwards}
 #splash.light .t{color:#2c6aa0}
 @keyframes spIn{from{opacity:0;transform:scale(.6)}}@keyframes spDraw{to{stroke-dashoffset:0}}@keyframes spTx{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){#splash svg,#splash .c,#splash .t{animation:none;stroke-dashoffset:0;opacity:1}}
@@ -71,13 +71,13 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 </style>
 </head>
 <body class="dark">
-<div id="splash" aria-hidden="true"><svg viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#2f6fa3"/><path class="c" pathLength="1" d="M19 33.5l8.5 8.5L45.5 23" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="t">tudy</div></div>
+<div id="splash" aria-hidden="true"><svg viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#2f6fa3"/><path class="c" pathLength="1" d="M21 24.5L29 36.5L43 13.5M29 36.5L22 50.5" fill="none" stroke="#fff" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="t"><svg viewBox="0 1 189 90" style="height:34px;width:auto;display:block" role="img" aria-label="tudy"><path d="M15.0 12V58Q15.0 70 27.0 70M7.0 30H25.0 M46.0 30V54A14 14 0 0 0 74.0 54V30M74.0 54V70 M133.0 8V70 M93.0 50A20 20 0 1 0 133.0 50A20 20 0 1 0 93.0 50 M152.0 46L164.0 64L182.0 30M164.0 64L153.5 84" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
 <script>(function(){var t='dark';try{var d=JSON.parse(localStorage.getItem('tudy.v2'));if(d&&d.theme)t=d.theme;else if(matchMedia('(prefers-color-scheme: light)').matches)t='light'}catch(e){}if(t=='light')document.getElementById('splash').classList.add('light');
 window.__sp0=Date.now();window.hideSplash=function(){var s=document.getElementById('splash');if(!s||s.dataset.h)return;s.dataset.h=1;var w=Math.max(0,1500-(Date.now()-window.__sp0));setTimeout(function(){s.classList.add('out');setTimeout(function(){s.remove()},400)},w)};setTimeout(window.hideSplash,4000)})()</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <div class="flex h-full">
   <aside class="hidden md:flex flex-col w-64 shrink-0 p-5 gap-2 border-r" style="border-color:var(--bd)">
-    <div class="text-2xl font-bold px-3 mb-6 acs">tudy</div>
+    <div class="px-3 mb-6 acs"><svg viewBox="0 1 189 90" style="height:30px;width:auto;display:block" role="img" aria-label="tudy"><path d="M15.0 12V58Q15.0 70 27.0 70M7.0 30H25.0 M46.0 30V54A14 14 0 0 0 74.0 54V30M74.0 54V70 M133.0 8V70 M93.0 50A20 20 0 1 0 133.0 50A20 20 0 1 0 93.0 50 M152.0 46L164.0 64L182.0 30M164.0 64L153.5 84" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <button class="side" data-nav="today"></button>
     <button class="side" data-nav="tasks"></button>
     <button class="side" data-nav="notes"></button>
@@ -193,7 +193,7 @@ function render(){
  if(!booted)return;$('#onb').style.display=authed()?'none':'grid';document.body.classList.toggle('dark',theme=='dark');document.querySelector('meta[name=theme-color]').content=theme=='dark'?'#0c1424':'#f2f6fc';document.documentElement.lang=lang;
  if(!authed()){onb();return}
  const v=S.open?'detail':S.view,h={today:vToday,tasks:vTasks,notes:vNotes,detail:vDetail,settings:vSet}[v]();
- $('#view').innerHTML=(v=='detail'?'':'<div class="md:hidden text-xl font-bold acs mb-3">tudy</div>')+'<div id="ntc"></div>'+h;fix('#view');$('#fab').innerHTML=I.plus;
+ $('#view').innerHTML=(v=='detail'?'':'<div class="md:hidden acs mb-3"><svg viewBox="0 1 189 90" style="height:24px;width:auto;display:block" role="img" aria-label="tudy"><path d="M15.0 12V58Q15.0 70 27.0 70M7.0 30H25.0 M46.0 30V54A14 14 0 0 0 74.0 54V30M74.0 54V70 M133.0 8V70 M93.0 50A20 20 0 1 0 133.0 50A20 20 0 1 0 93.0 50 M152.0 46L164.0 64L182.0 30M164.0 64L153.5 84" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg></div>')+'<div id="ntc"></div>'+h;fix('#view');$('#fab').innerHTML=I.plus;
  $('#fab').style.display=v=='detail'||v=='settings'?'none':'grid';
  const c=$('#cta');c.classList.toggle('hidden',v!='detail');
  if(v=='detail')c.innerHTML=`<button data-complete class="btn w-full max-w-2xl mx-auto py-4 rounded-2xl font-semibold flex items-center justify-center gap-3"><span class="cb" style="border-color:#fff;width:20px;height:20px"></span>Mark Task Complete</button>`;fix('#cta');
@@ -280,7 +280,7 @@ const ic=k=>k=='settings'&&avatar?`<img src="${avatar}" alt="" class="rounded-fu
 const errT=t=>{if(/not authorized|sending confirmation|sending recovery|sending magic|error sending/i.test(t))return tx('Sign-up by email is not available right now. Use “Continue with Google”.');const m=/(\d+) seconds?/.exec(t);if(/security purposes/i.test(t)&&m)return lang=='it'?`Per sicurezza puoi riprovare tra ${m[1]} secondi.`:t;if(/rate limit/i.test(t))return lang=='it'?'Troppe richieste email. Riprova tra un po’ oppure usa “Continua con Google”.':'Too many email requests. Try again later or use “Continue with Google”.';return tx(t)};
 const resizeImg=f=>new Promise((ok,no)=>{const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const n=256,c=document.createElement('canvas');c.width=c.height=n;const q=Math.min(im.width,im.height);c.getContext('2d').drawImage(im,(im.width-q)/2,(im.height-q)/2,q,q,0,0,n,n);ok(c.toDataURL('image/jpeg',.82))};im.onerror=no;im.src=r.result};r.onerror=no;r.readAsDataURL(f)});
 const fileFld=x=>`<div class="flex items-center gap-3 mt-1"><div data-pv class="btn w-14 h-14 rounded-full overflow-hidden grid place-items-center text-xl font-bold shrink-0">${x.v?`<img src="${x.v}" alt="" class="w-full h-full object-cover">`:esc(U.name[0].toUpperCase())}</div><label class="chip cursor-pointer">Change photo<input type="file" name="${x.k}" accept="image/*" class="hidden"></label><button type="button" data-rmav class="mu text-xs">Remove</button></div>`;
-function pendScreen(){$('#onb').innerHTML=`<div class="w-full max-w-sm text-center"><div class="text-4xl font-bold acs">tudy</div><div class="mx-auto mt-8 w-16 h-16 rounded-full grid place-items-center acs" style="background:var(--pill)">${I.mail}</div><h1 class="text-2xl font-bold mt-5">Check your email</h1><p class="mu mt-3 text-sm">We sent a confirmation link to</p><p class="font-semibold mt-1 break-all">${esc(pend)}</p><p class="mu mt-3 text-sm">Open the email and tap the link to confirm your account. Then you will be logged in automatically. If you can’t find it, check your spam folder.</p><p id="err" class="text-xs mt-3" style="color:var(--acs)"></p><button data-resend class="btn w-full py-3 rounded-2xl font-semibold mt-3">Resend email</button><button data-back2 class="mu text-sm mt-4 w-full">Back to log in</button></div>`;fix('#onb');
+function pendScreen(){$('#onb').innerHTML=`<div class="w-full max-w-sm text-center"><div class="acs flex justify-center"><svg viewBox="0 1 189 90" style="height:44px;width:auto;display:block" role="img" aria-label="tudy"><path d="M15.0 12V58Q15.0 70 27.0 70M7.0 30H25.0 M46.0 30V54A14 14 0 0 0 74.0 54V30M74.0 54V70 M133.0 8V70 M93.0 50A20 20 0 1 0 133.0 50A20 20 0 1 0 93.0 50 M152.0 46L164.0 64L182.0 30M164.0 64L153.5 84" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="mx-auto mt-8 w-16 h-16 rounded-full grid place-items-center acs" style="background:var(--pill)">${I.mail}</div><h1 class="text-2xl font-bold mt-5">Check your email</h1><p class="mu mt-3 text-sm">We sent a confirmation link to</p><p class="font-semibold mt-1 break-all">${esc(pend)}</p><p class="mu mt-3 text-sm">Open the email and tap the link to confirm your account. Then you will be logged in automatically. If you can’t find it, check your spam folder.</p><p id="err" class="text-xs mt-3" style="color:var(--acs)"></p><button data-resend class="btn w-full py-3 rounded-2xl font-semibold mt-3">Resend email</button><button data-back2 class="mu text-sm mt-4 w-full">Back to log in</button></div>`;fix('#onb');
  const E=$('#err'),q=x=>$('#onb').querySelector(x);
  q('[data-back2]').onclick=()=>{pend=null;am='login';onb()};
  q('[data-resend]').onclick=async()=>{const r=await sb.auth.resend({type:'signup',email:pend});E.style.color=r.error?'#e57373':'var(--acs)';E.textContent=r.error?errT(r.error.message):tx('Email sent again.')}}
@@ -340,7 +340,7 @@ function newNote(){sheet('New note',[{k:'title',l:'Title',ph:'Give it a name'},{
 function editNote(id){const n=notes.find(x=>x.id==id);sheet('Edit note',[{k:'title',l:'Title',v:n.t},{k:'body',l:'Note',t:'area',v:n.b},{k:'cat',l:'Theme',t:'chips',o:[...myCats(),''],v:myCats().includes(n.c)?n.c:''}],'Save changes',v=>{if(!v.title&&!v.body)return false;Object.assign(n,{t:v.title||tx('Untitled'),b:v.body,c:v.cat});render()},{label:'Delete note',fn:()=>sheet('Delete this note?',[],'Delete',()=>{notes=notes.filter(x=>x.id!=id);render()})})}
 function newSub(){sheet('New subtask',[{k:'title',l:'Subtask',ph:'What is the next step?'}],'Add subtask',v=>{
  if(!v.title)return false;tasks.find(t=>t.id==S.open).subs.push([v.title,0]);render()})}
-function onb(){if(pend)return pendScreen();const reg=am=='register';$('#onb').innerHTML=`<form id="reg" class="w-full max-w-sm" novalidate><div class="text-4xl font-bold acs">tudy</div><p class="mu mt-2">${reg?'Your day, one focus at a time. Create your profile to get started.':'Log in to pick up your day.'}</p>
+function onb(){if(pend)return pendScreen();const reg=am=='register';$('#onb').innerHTML=`<form id="reg" class="w-full max-w-sm" novalidate><div class="acs"><svg viewBox="0 1 189 90" style="height:44px;width:auto;display:block" role="img" aria-label="tudy"><path d="M15.0 12V58Q15.0 70 27.0 70M7.0 30H25.0 M46.0 30V54A14 14 0 0 0 74.0 54V30M74.0 54V70 M133.0 8V70 M93.0 50A20 20 0 1 0 133.0 50A20 20 0 1 0 93.0 50 M152.0 46L164.0 64L182.0 30M164.0 64L153.5 84" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg></div><p class="mu mt-3">${reg?'Your day, one focus at a time. Create your profile to get started.':'Log in to pick up your day.'}</p>
 ${reg?'<label class="block mt-6 text-xs mu">Name<input name="name" class="inp mt-1" autocomplete="name"></label>':''}
 <label class="block ${reg?'mt-3':'mt-6'} text-xs mu">Email<input name="email" type="email" class="inp mt-1" autocomplete="email"></label>
 <label class="block mt-3 text-xs mu">Password (min. 6 characters)<input name="pw" type="password" class="inp mt-1" autocomplete="${reg?'new-password':'current-password'}"></label>
@@ -568,7 +568,7 @@ async function delAccount(){await null;
 async function googleIn(){if(!sb)return;const E=$('#err');try{if(!navigator.onLine)throw new Error('offline');
  const r=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname,queryParams:{prompt:'select_account'}}});
  if(r.error)throw r.error}catch(e){console.error(e);if(E){E.style.color='#e57373';E.textContent=/provider is not enabled|Unsupported provider/i.test(e.message||'')?tx('Google sign-in is not set up yet.'):tx('Could not complete. Check your connection.')}}}
-const APPV='p20';
+const APPV='p21';
 // Aggiornamenti automatici: controlla sempre se c'è un sw.js nuovo e, quando la nuova versione prende il controllo, ricarica la pagina una volta.
 if('serviceWorker'in navigator&&/^https?:/.test(location.protocol)){const hadCtl=!!navigator.serviceWorker.controller;let reloaded=false;
  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadCtl&&!reloaded){reloaded=true;location.reload()}});
