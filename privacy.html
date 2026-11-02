@@ -43,7 +43,7 @@ p{margin:6px 0}ul{margin:6px 0;padding-left:20px}li{margin:4px 0}
   <p class="lead">tudy è un’app personale per organizzare le attività di ogni giorno. Questa pagina spiega, in modo semplice, quali dati usa, dove sono conservati e come puoi gestirli.</p>
   <section><h2>Chi gestisce tudy</h2><p>tudy è un progetto personale, non un’azienda. Per qualsiasi domanda o richiesta sui tuoi dati scrivi a <a class="contact" href="#"></a>.</p></section>
   <section><h2>Quali dati salva</h2><ul>
-   <li><b>Account:</b> email, password (conservata cifrata, nessuno può leggerla) e il nome che scegli.</li>
+   <li><b>Account:</b> email, password (conservata cifrata, nessuno può leggerla) e il nome che scegli. Se entri con Google, tudy riceve da Google solo nome, email e foto del profilo Google, e non usa nessuna password.</li>
    <li><b>Foto profilo:</b> solo se ne aggiungi una, ridotta a un’immagine piccola.</li>
    <li><b>Contenuti:</b> attività, sottoattività, note e temi che crei.</li>
    <li><b>Preferenze:</b> lingua, tema chiaro/scuro, impostazioni degli avvisi e fuso orario (serve a mandare gli avvisi all’ora giusta).</li>
@@ -52,6 +52,7 @@ p{margin:6px 0}ul{margin:6px 0;padding-left:20px}li{margin:4px 0}
   <section><h2>Perché li usa</h2><p>Solo per far funzionare l’app: farti accedere, salvare e sincronizzare i tuoi contenuti tra i dispositivi e mandarti gli avvisi che hai scelto. I dati non vengono venduti, ceduti né usati per pubblicità o profilazione.</p></section>
   <section><h2>Dove sono conservati</h2><ul>
    <li><b>Supabase</b>, il servizio che ospita il database e gli accessi. Ogni persona può leggere solo i propri dati.</li>
+   <li><b>Google</b>, solo se scegli “Continua con Google”: verifica la tua identità e comunica a tudy nome ed email. tudy non accede a nient’altro del tuo account Google.</li>
    <li><b>Vercel</b>, che ospita l’app: come ogni sito, può registrare dati tecnici di connessione (ad esempio l’indirizzo IP) per sicurezza e funzionamento.</li>
    <li><b>Sul tuo dispositivo</b>: una copia dei dati resta nel browser, così tudy funziona anche offline.</li>
    <li><b>Servizi di notifica</b> del tuo browser (Google, Apple o Mozilla): ricevono gli avvisi già cifrati per consegnarli, senza poterne leggere il contenuto.</li>
@@ -74,7 +75,7 @@ p{margin:6px 0}ul{margin:6px 0;padding-left:20px}li{margin:4px 0}
   <p class="lead">tudy is a personal app for organising everyday tasks. This page explains, in plain words, what data it uses, where it is stored and how you can manage it.</p>
   <section><h2>Who runs tudy</h2><p>tudy is a personal project, not a company. For any question or request about your data, write to <a class="contact" href="#"></a>.</p></section>
   <section><h2>What it stores</h2><ul>
-   <li><b>Account:</b> email, password (stored encrypted, nobody can read it) and the name you choose.</li>
+   <li><b>Account:</b> email, password (stored encrypted, nobody can read it) and the name you choose. If you sign in with Google, tudy only receives your name, email and Google profile picture, and uses no password.</li>
    <li><b>Profile photo:</b> only if you add one, reduced to a small image.</li>
    <li><b>Content:</b> the tasks, subtasks, notes and themes you create.</li>
    <li><b>Preferences:</b> language, light/dark theme, reminder settings and time zone (used to send reminders at the right time).</li>
@@ -83,6 +84,7 @@ p{margin:6px 0}ul{margin:6px 0;padding-left:20px}li{margin:4px 0}
   <section><h2>Why it uses them</h2><p>Only to make the app work: to sign you in, save and sync your content across devices, and send the reminders you chose. Your data is not sold, shared or used for advertising or profiling.</p></section>
   <section><h2>Where it is stored</h2><ul>
    <li><b>Supabase</b>, which hosts the database and sign-in. Each person can only read their own data.</li>
+   <li><b>Google</b>, only if you choose “Continue with Google”: it confirms your identity and shares your name and email with tudy. tudy does not access anything else in your Google account.</li>
    <li><b>Vercel</b>, which hosts the app: like any website, it may log technical connection data (such as your IP address) for security and operation.</li>
    <li><b>On your device</b>: a copy of your data stays in the browser, so tudy also works offline.</li>
    <li><b>Your browser’s notification service</b> (Google, Apple or Mozilla): it receives reminders already encrypted in order to deliver them, without being able to read them.</li>
