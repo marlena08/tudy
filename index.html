@@ -8,10 +8,10 @@
 #splash{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:#2f6fa3;transition:opacity .4s ease}
 #splash.out{opacity:0;pointer-events:none}
 #splash svg{width:200px;height:200px}
-/* prima compare la spunta (bracci sopra la riga) con un piccolo rimbalzo, poi la stanghetta cresce verso il basso */
-#splash .ck{transform-box:view-box;transform-origin:34px 30.1px;animation:spCk .45s .15s cubic-bezier(.3,1.45,.5,1) both}
-#splash .tl{transform-box:view-box;transform-origin:32px 39.1px;animation:spTl .38s .62s cubic-bezier(.45,0,.2,1) both}
-@keyframes spCk{from{opacity:0;transform:scale(.55)}}@keyframes spTl{from{transform:scaleY(0)}}
+/* prima compare la spunta (dissolvenza, ferma), poi la stanghetta si allunga dall'alto verso il basso */
+#splash .ck{animation:spCk .4s .15s ease-out both}
+#splash .tl{transform-box:view-box;transform-origin:32px 39.1px;animation:spTl .4s .55s cubic-bezier(.3,0,.2,1) both}
+@keyframes spCk{from{opacity:0}}@keyframes spTl{from{transform:scaleY(0)}}
 @media(prefers-reduced-motion:reduce){#splash .ck,#splash .tl{animation:none}}
 </style>
 <meta name="theme-color" content="#2f6fa3">
@@ -568,7 +568,7 @@ async function delAccount(){await null;
 async function googleIn(){if(!sb)return;const E=$('#err');try{if(!navigator.onLine)throw new Error('offline');
  const r=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname,queryParams:{prompt:'select_account'}}});
  if(r.error)throw r.error}catch(e){console.error(e);if(E){E.style.color='#e57373';E.textContent=/provider is not enabled|Unsupported provider/i.test(e.message||'')?tx('Google sign-in is not set up yet.'):tx('Could not complete. Check your connection.')}}}
-const APPV='p25';
+const APPV='p27';
 // Aggiornamenti automatici: controlla sempre se c'è un sw.js nuovo e, quando la nuova versione prende il controllo, ricarica la pagina una volta.
 if('serviceWorker'in navigator&&/^https?:/.test(location.protocol)){const hadCtl=!!navigator.serviceWorker.controller;let reloaded=false;
  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadCtl&&!reloaded){reloaded=true;location.reload()}});
