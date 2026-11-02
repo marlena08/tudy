@@ -11,7 +11,7 @@
 /* la spunta si disegna poco a poco (braccio corto, poi braccio lungo), poi la stanghetta intera scorre verso il basso */
 #splash .c{stroke-dasharray:1;stroke-dashoffset:0;animation:spDraw .7s .15s cubic-bezier(.45,0,.25,1) both}
 #splash .tl{animation:spTl .45s .9s cubic-bezier(.3,0,.2,1) both}
-@keyframes spDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}@keyframes spTl{from{transform:translate(5.88px,-13.85px)}}
+@keyframes spDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}@keyframes spTl{from{transform:translate(6.9px,-16.3px)}}
 @media(prefers-reduced-motion:reduce){#splash .c,#splash .tl{animation:none}}
 </style>
 <meta name="theme-color" content="#2f6fa3">
@@ -71,7 +71,7 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 </style>
 </head>
 <body class="dark">
-<div id="splash" aria-hidden="true"><svg viewBox="0 0 64 64"><g class="ck"><g transform="translate(13.79 39.12) scale(0.04860)"><mask id="spc" maskUnits="userSpaceOnUse" x="-301" y="-858" width="1233" height="1423"><rect x="-301" y="-858" width="1233" height="1423" fill="#fff"/><rect x="-201" y="-758" width="520" height="390" fill="#000"/></mask><clipPath id="spa"><rect x="-301" y="-858" width="1233" height="861"/></clipPath><mask id="spr" maskUnits="userSpaceOnUse" x="-301" y="-858" width="1233" height="1423"><path class="c" pathLength="1" d="M154 -400 L315 -20 L564 -620" fill="none" stroke="#fff" stroke-width="321" stroke-linecap="round" stroke-linejoin="round"/></mask><g mask="url(#spr)"><path d="M632 -558 282 265H98L226 -19L-1 -558H190L319 -209L447 -558Z" fill="#fff" mask="url(#spc)" clip-path="url(#spa)"/></g></g></g><clipPath id="spw"><rect x="0" y="38.92" width="64" height="25.08"/></clipPath><g clip-path="url(#spw)"><g class="tl"><g transform="translate(13.79 39.12) scale(0.04860)"><clipPath id="spb"><rect x="-301" y="-3" width="1233" height="568"/></clipPath><path d="M632 -558 282 265H98L226 -19L-1 -558H190L319 -209L447 -558Z" fill="#fff" clip-path="url(#spb)"/></g></g></g></svg></div>
+<div id="splash" aria-hidden="true"><svg viewBox="0 0 64 64"><g class="ck"><g transform="translate(13.79 39.12) scale(0.04860)"><mask id="spc" maskUnits="userSpaceOnUse" x="-301" y="-858" width="1233" height="1423"><rect x="-301" y="-858" width="1233" height="1423" fill="#fff"/><rect x="-201" y="-758" width="520" height="390" fill="#000"/></mask><clipPath id="spa"><rect x="-301" y="-858" width="1233" height="838"/></clipPath><mask id="spr" maskUnits="userSpaceOnUse" x="-301" y="-858" width="1233" height="1423"><path class="c" pathLength="1" d="M154 -400 L315 -20 L564 -620" fill="none" stroke="#fff" stroke-width="321" stroke-linecap="round" stroke-linejoin="round"/></mask><g mask="url(#spr)"><path d="M632 -558 282 265H98L226 -19L-1 -558H190L319 -209L447 -558Z" fill="#fff" mask="url(#spc)" clip-path="url(#spa)"/></g></g></g><clipPath id="spw"><rect x="0" y="38.05" width="64" height="25.95"/></clipPath><g clip-path="url(#spw)"><g class="tl"><g transform="translate(13.79 39.12) scale(0.04860)"><clipPath id="spb"><rect x="-301" y="-23" width="1233" height="588"/></clipPath><path d="M632 -558 282 265H98L226 -19L-1 -558H190L319 -209L447 -558Z" fill="#fff" clip-path="url(#spb)"/></g></g></g></svg></div>
 <script>(function(){var t='dark';try{var d=JSON.parse(localStorage.getItem('tudy.v2'));if(d&&d.theme)t=d.theme;else if(matchMedia('(prefers-color-scheme: light)').matches)t='light'}catch(e){}
 window.__sp0=Date.now();window.hideSplash=function(){var s=document.getElementById('splash');if(!s||s.dataset.h)return;s.dataset.h=1;var w=Math.max(0,1800-(Date.now()-window.__sp0));setTimeout(function(){s.classList.add('out');setTimeout(function(){s.remove()},400)},w)};setTimeout(window.hideSplash,4000)})()</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -568,7 +568,7 @@ async function delAccount(){await null;
 async function googleIn(){if(!sb)return;const E=$('#err');try{if(!navigator.onLine)throw new Error('offline');
  const r=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname,queryParams:{prompt:'select_account'}}});
  if(r.error)throw r.error}catch(e){console.error(e);if(E){E.style.color='#e57373';E.textContent=/provider is not enabled|Unsupported provider/i.test(e.message||'')?tx('Google sign-in is not set up yet.'):tx('Could not complete. Check your connection.')}}}
-const APPV='p30';
+const APPV='p31';
 // Aggiornamenti automatici: controlla sempre se c'è un sw.js nuovo e, quando la nuova versione prende il controllo, ricarica la pagina una volta.
 if('serviceWorker'in navigator&&/^https?:/.test(location.protocol)){const hadCtl=!!navigator.serviceWorker.controller;let reloaded=false;
  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadCtl&&!reloaded){reloaded=true;location.reload()}});
