@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c1424">
+<link rel="icon" type="image/png" sizes="64x64" href="icons/favicon-64.png">
+<title>tudy · Privacy</title>
+<style>
+:root{--bg:#f2f6fc;--sf:#f8fafd;--bd:#d5e1f0;--ac:#2c6aa0;--acs:#2c6aa0;--tx:#17243a;--mu:#6b7a90}
+.dark{--bg:#0c1424;--sf:#151c2c;--bd:#1f3a57;--ac:#2f6fa3;--acs:#7fb1dc;--tx:#f2f5fa;--mu:#8a97ab}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--tx)}
+main{max-width:720px;margin:0 auto;padding:calc(28px + env(safe-area-inset-top)) 16px 64px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:22px;color:var(--acs);text-decoration:none}
+.logo svg{width:32px;height:32px}
+.lang{display:flex;gap:6px}
+.lang button{border:1px solid var(--bd);background:var(--sf);color:var(--mu);border-radius:999px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
+.lang button.on{background:var(--ac);border-color:var(--ac);color:#fff}
+h1{font-size:30px;line-height:1.2;margin:28px 0 4px}
+.date{color:var(--mu);font-size:14px;margin:0}
+.lead{margin:20px 0 8px}
+section{background:var(--sf);border:1px solid var(--bd);border-radius:18px;padding:18px 20px;margin-top:14px}
+h2{font-size:18px;margin:0 0 6px}
+p{margin:6px 0}ul{margin:6px 0;padding-left:20px}li{margin:4px 0}
+.mu{color:var(--mu)}a{color:var(--acs)}
+.back{display:inline-block;margin-top:28px;font-weight:600}
+[data-l]{display:none}html[lang=it] [data-l=it],html[lang=en] [data-l=en]{display:block}
+</style>
+</head>
+<body>
+<main>
+ <div class="top">
+  <a class="logo" href="./"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#2f6fa3"/><path d="M19 33.5l8.5 8.5L45.5 23" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>tudy</a>
+  <div class="lang"><button data-set="it">IT</button><button data-set="en">EN</button></div>
+ </div>
+
+ <!-- ===== ITALIANO ===== -->
+ <div data-l="it">
+  <h1>Privacy</h1>
+  <p class="date">Ultimo aggiornamento: 2 novembre 2026</p>
+  <p class="lead">tudy è un’app personale per organizzare le attività di ogni giorno. Questa pagina spiega, in modo semplice, quali dati usa, dove sono conservati e come puoi gestirli.</p>
+  <section><h2>Chi gestisce tudy</h2><p>tudy è un progetto personale, non un’azienda. Per qualsiasi domanda o richiesta sui tuoi dati scrivi a <a class="contact" href="#"></a>.</p></section>
+  <section><h2>Quali dati salva</h2><ul>
+   <li><b>Account:</b> email, password (conservata cifrata, nessuno può leggerla) e il nome che scegli.</li>
+   <li><b>Foto profilo:</b> solo se ne aggiungi una, ridotta a un’immagine piccola.</li>
+   <li><b>Contenuti:</b> attività, sottoattività, note e temi che crei.</li>
+   <li><b>Preferenze:</b> lingua, tema chiaro/scuro, impostazioni degli avvisi e fuso orario (serve a mandare gli avvisi all’ora giusta).</li>
+   <li><b>Notifiche:</b> se le attivi, l’indirizzo tecnico che il tuo browser fornisce per ricevere le notifiche push.</li>
+  </ul><p class="mu">tudy non raccoglie la tua posizione, i contatti, statistiche di utilizzo o dati per la pubblicità.</p></section>
+  <section><h2>Perché li usa</h2><p>Solo per far funzionare l’app: farti accedere, salvare e sincronizzare i tuoi contenuti tra i dispositivi e mandarti gli avvisi che hai scelto. I dati non vengono venduti, ceduti né usati per pubblicità o profilazione.</p></section>
+  <section><h2>Dove sono conservati</h2><ul>
+   <li><b>Supabase</b>, il servizio che ospita il database e gli accessi. Ogni persona può leggere solo i propri dati.</li>
+   <li><b>Vercel</b>, che ospita l’app: come ogni sito, può registrare dati tecnici di connessione (ad esempio l’indirizzo IP) per sicurezza e funzionamento.</li>
+   <li><b>Sul tuo dispositivo</b>: una copia dei dati resta nel browser, così tudy funziona anche offline.</li>
+   <li><b>Servizi di notifica</b> del tuo browser (Google, Apple o Mozilla): ricevono gli avvisi già cifrati per consegnarli, senza poterne leggere il contenuto.</li>
+   <li><b>Librerie e font</b>: alcune parti tecniche dell’app (la libreria di Supabase e il font Inter) vengono scaricate da jsDelivr e Google Fonts, che vedono quindi l’indirizzo IP del dispositivo.</li>
+  </ul></section>
+  <section><h2>Per quanto tempo</h2><p>Finché hai un account. Le attività e le note che elimini vengono cancellate anche dal server alla sincronizzazione successiva. Se elimini l’account, tutti i tuoi dati vengono cancellati dal server in modo definitivo.</p></section>
+  <section><h2>I tuoi diritti</h2><p>In base al GDPR puoi accedere ai tuoi dati, correggerli, portarli altrove e cancellarli. Lo puoi fare da solo in <b>Profilo</b>:</p><ul>
+   <li><b>Scarica i miei dati</b>: un file con tutte le tue attività, note e impostazioni.</li>
+   <li><b>Modifica profilo</b>: nome, email, foto e password.</li>
+   <li><b>Elimina account</b>: cancella l’account e tutti i dati.</li>
+  </ul><p>Per qualsiasi altra richiesta scrivi all’indirizzo indicato sopra. Puoi anche rivolgerti al Garante per la protezione dei dati personali.</p></section>
+  <section><h2>Modifiche</h2><p>Se questa pagina cambia in modo importante, lo troverai indicato qui con la nuova data.</p></section>
+  <a class="back" href="./">← Torna a tudy</a>
+ </div>
+
+ <!-- ===== ENGLISH ===== -->
+ <div data-l="en">
+  <h1>Privacy</h1>
+  <p class="date">Last updated: November 2, 2026</p>
+  <p class="lead">tudy is a personal app for organising everyday tasks. This page explains, in plain words, what data it uses, where it is stored and how you can manage it.</p>
+  <section><h2>Who runs tudy</h2><p>tudy is a personal project, not a company. For any question or request about your data, write to <a class="contact" href="#"></a>.</p></section>
+  <section><h2>What it stores</h2><ul>
+   <li><b>Account:</b> email, password (stored encrypted, nobody can read it) and the name you choose.</li>
+   <li><b>Profile photo:</b> only if you add one, reduced to a small image.</li>
+   <li><b>Content:</b> the tasks, subtasks, notes and themes you create.</li>
+   <li><b>Preferences:</b> language, light/dark theme, reminder settings and time zone (used to send reminders at the right time).</li>
+   <li><b>Notifications:</b> if you turn them on, the technical address your browser provides to receive push notifications.</li>
+  </ul><p class="mu">tudy does not collect your location, contacts, usage statistics or advertising data.</p></section>
+  <section><h2>Why it uses them</h2><p>Only to make the app work: to sign you in, save and sync your content across devices, and send the reminders you chose. Your data is not sold, shared or used for advertising or profiling.</p></section>
+  <section><h2>Where it is stored</h2><ul>
+   <li><b>Supabase</b>, which hosts the database and sign-in. Each person can only read their own data.</li>
+   <li><b>Vercel</b>, which hosts the app: like any website, it may log technical connection data (such as your IP address) for security and operation.</li>
+   <li><b>On your device</b>: a copy of your data stays in the browser, so tudy also works offline.</li>
+   <li><b>Your browser’s notification service</b> (Google, Apple or Mozilla): it receives reminders already encrypted in order to deliver them, without being able to read them.</li>
+   <li><b>Libraries and fonts</b>: some technical parts of the app (the Supabase library and the Inter font) are loaded from jsDelivr and Google Fonts, which therefore see your device’s IP address.</li>
+  </ul></section>
+  <section><h2>How long</h2><p>For as long as you have an account. Tasks and notes you delete are also removed from the server at the next sync. If you delete your account, all your data is permanently deleted from the server.</p></section>
+  <section><h2>Your rights</h2><p>Under the GDPR you can access, correct, move and delete your data. You can do it yourself in <b>Profile</b>:</p><ul>
+   <li><b>Download my data</b>: a file with all your tasks, notes and settings.</li>
+   <li><b>Edit profile</b>: name, email, photo and password.</li>
+   <li><b>Delete account</b>: deletes your account and all your data.</li>
+  </ul><p>For any other request, write to the address above. You can also contact your data protection authority.</p></section>
+  <section><h2>Changes</h2><p>If this page changes in an important way, you will find it noted here with the new date.</p></section>
+  <a class="back" href="./">← Back to tudy</a>
+ </div>
+</main>
+<script>
+// Indirizzo per le richieste sulla privacy: cambialo solo qui.
+var CONTACT='nobilemorena8@gmail.com';
+(function(){var h=document.documentElement,q=new URLSearchParams(location.search).get('lang'),t='dark',l;
+ try{var d=JSON.parse(localStorage.getItem('tudy.v2'));if(d){if(d.theme)t=d.theme;l=d.lang}}catch(e){}
+ if(!l)l=(navigator.language||'en').slice(0,2)=='it'?'it':'en';if(q=='it'||q=='en')l=q;
+ if(!(function(){try{return JSON.parse(localStorage.getItem('tudy.v2')).theme}catch(e){}})()&&matchMedia('(prefers-color-scheme: light)').matches)t='light';
+ if(t=='dark')document.body.classList.add('dark');document.querySelector('meta[name=theme-color]').content=t=='dark'?'#0c1424':'#f2f6fc';
+ var set=function(x){h.lang=x;document.title='tudy · Privacy';document.querySelectorAll('[data-set]').forEach(function(b){b.classList.toggle('on',b.dataset.set==x)})};set(l);
+ document.querySelectorAll('[data-set]').forEach(function(b){b.onclick=function(){set(b.dataset.set)}});
+ document.querySelectorAll('.contact').forEach(function(a){a.textContent=CONTACT;a.href='mailto:'+CONTACT})})();
+</script>
+</body>
+</html>
